@@ -26,6 +26,7 @@ const config = {
     new HtmlWebpackPlugin({
       // used to add the JavaScript code to the HTML
       template: path.join(PUBLIC_DIRECTORY, 'index.html'),
+      favicon: ".\public\assets\favicon-16x16.png"
     }),
   ],
   module: {
