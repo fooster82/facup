@@ -1,10 +1,14 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './style.css';
 
 export function Header() {
     return (
-        <div>
-            ---Header content goes here---
-        </div>
+        <header>
+            <nav id='navbar'>
+                <NavLink exact to='/'>Home</NavLink>
+                <NavLink to='/tracker'>Tracker</NavLink>
+            </nav>
+        </header>
     )
 }

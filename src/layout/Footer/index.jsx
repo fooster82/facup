@@ -3,8 +3,8 @@ import './style.css';
 
 export function Footer() {
     return (
-        <div>
+        <footer>
             ---Footer content goes here---
-        </div>
+        </footer>
     )
 }

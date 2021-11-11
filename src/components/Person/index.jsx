@@ -26,7 +26,7 @@ export function Person({ name, teams }) {
     )
 }
 
-Person.PropTypes = {
+Person.propTypes = {
     name: PropTypes.string.isRequired,
     teams: PropTypes.array.isRequired
 }
