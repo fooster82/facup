@@ -1,0 +1,11 @@
+#content {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#person-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: pink;
+}

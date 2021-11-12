@@ -1,10 +1,12 @@
 import React from 'react';
-import './style.css'
+import './style.css';
+
+import { Rules } from '../../components';
 
 export function Home() {
     return (
-        <div>
-            ---Homepage goes here---
-        </div>
+       <>
+        <Rules />
+       </>
     )
 }
