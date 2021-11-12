@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-import { ShowTeamsBtn } from '..'
+import { ShowTeamsBtn } from '..';
 
 export function Person({ name, teams }) {
-    const [ teamList, setTeamList ] = useState(false);
-
-    const handleHover = () => setTeamList(pre => !pre);
 
     return (
         <div className='card'>
-            <h1 onMouseOver={handleHover} >{name}</h1>
+            <h1>{name}</h1>
 
             <ShowTeamsBtn />
 
-            <ul style={{display: teamList ? 'initial' : 'none'}}>
+            <ul>
                 <li>Extra Preliminary Round: {teams[0]}</li>
                 <li>Preliminary Round: {teams[1]}</li>
                 <li>First Round Qualifying: {teams[2]}</li>
