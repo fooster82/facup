@@ -21,6 +21,7 @@ from facup import views
 
 router = routers.DefaultRouter()
 router.register(r'teams',views.TeamView, 'team')
+router.register(r'stats',views.StatView, 'stat')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
