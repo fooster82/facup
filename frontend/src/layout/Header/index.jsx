@@ -1,15 +1,19 @@
 import React from 'react';
+import { useHistory } from 'react-router';
+
 import { NavLink } from 'react-router-dom';
-import { BackButton } from '../../components';
+import { Button } from '../../components';
 import './style.css';
 
 export function Header() {
+    let history = useHistory()
+
     return (
         <header>
             <nav id='navbar'>
                 <NavLink exact to='/'>Home</NavLink>
                 <NavLink to='/tracker'>Tracker</NavLink>
-                <BackButton />
+                <Button text={"Back"} click={history.goBack}/>
             </nav>
         </header>
     )
