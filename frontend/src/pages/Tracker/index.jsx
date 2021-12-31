@@ -7,13 +7,22 @@ import { Person } from '../../components';
 
 export function Tracker() {
 
-    const [ teams, setTeams ] = useState([]);
+    const [ teamsR, setTeamsR ] = useState([]);
+    const [ teamsA, setTeamsA ] = useState([]);
+    const [ teamsP, setTeamsP ] = useState([]);
+
     useEffect(() => {
         const fetchTeams = async () => {
             try {
                 let { data } = await axios.get('http://127.0.0.1:8000/api/stats/');
-                let teamData = data[0].teams
-                setTeams(teamData)
+
+                let teamDataR = data[0].teams;
+                let teamDataA = data[1].teams;
+                let teamDataP = data[2].teams;
+
+                setTeamsR(teamDataR);
+                setTeamsA(teamDataA);
+                setTeamsP(teamDataP);
             } catch (err) {
                 console.warn(err)
             }
@@ -25,9 +34,9 @@ export function Tracker() {
         <div id='content'>
             <Map />
             <div id='person-div'>
-                <Person name='Rob' teams={teams}/>
-                <Person name='Adelle' teams={['Mousehole AFC', 'Mousehole AFC', 'Plymouth Parkway', 'Gosport Borough', 'Yate Town', 'Yate Town', 'Yate Town', 'Yeovil']}/>
-                <Person name='Pat' teams={['Hadley', 'Hadley', 'Hadley', 'Hadley', 'Enfield Town', 'Chelmsford City', 'Harrow Borough', 'Portsmouth']}/>
+                <Person name='Rob' teams={teamsR}/>
+                <Person name='Adelle' teams={teamsA}/>
+                <Person name='Pat' teams={teamsP}/>
             </div>
         </div>
     )
