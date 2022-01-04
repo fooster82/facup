@@ -7,9 +7,9 @@ import { Person } from '../../components';
 
 export function Tracker() {
 
-    const [ teamsR, setTeamsR ] = useState([]);
-    const [ teamsA, setTeamsA ] = useState([]);
+    const [ teamsR, setTeamsR ] = useState([]);   
     const [ teamsP, setTeamsP ] = useState([]);
+    const [ teamsA, setTeamsA ] = useState([]);
 
     useEffect(() => {
         const fetchTeams = async () => {
@@ -17,12 +17,12 @@ export function Tracker() {
                 let { data } = await axios.get('http://127.0.0.1:8000/api/stats/');
 
                 let teamDataR = data[0].teams;
-                let teamDataA = data[1].teams;
-                let teamDataP = data[2].teams;
+                let teamDataP = data[1].teams;
+                let teamDataA = data[2].teams;                
 
-                setTeamsR(teamDataR);
-                setTeamsA(teamDataA);
+                setTeamsR(teamDataR);                
                 setTeamsP(teamDataP);
+                setTeamsA(teamDataA);
             } catch (err) {
                 console.warn(err)
             }
@@ -34,9 +34,9 @@ export function Tracker() {
         <div id='content'>
             <Map />
             <div id='person-div'>
-                <Person name='Rob' teams={teamsR}/>
-                <Person name='Adelle' teams={teamsA}/>
+                <Person name='Rob' teams={teamsR}/>                
                 <Person name='Pat' teams={teamsP}/>
+                <Person name='Adelle' teams={teamsA}/>
             </div>
         </div>
     )

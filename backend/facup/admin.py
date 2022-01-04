@@ -5,8 +5,5 @@ from .models import Team, Stat
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'ground', 'latitude', 'longitude')
 
-class StatAdmin(admin.ModelAdmin):
-    list_display = ('username', 'teams')
-
-admin.site.register(Stat, StatAdmin)
+admin.site.register(Stat)
 admin.site.register(Team, TeamAdmin)

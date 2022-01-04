@@ -13,6 +13,7 @@ export function Header() {
             <nav id='navbar'>
                 <NavLink exact to='/'>Home</NavLink>
                 <NavLink to='/tracker'>Tracker</NavLink>
+                <NavLink to='admin'>Admin Page</NavLink>
                 <Button text={"Back"} click={history.goBack}/>
             </nav>
         </header>

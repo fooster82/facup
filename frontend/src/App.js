@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { Header, Footer } from './layout';
-import { Home, Tracker } from './pages';
+import { Home, Tracker, AdminPage } from './pages';
 
 
 export function App() {
@@ -18,6 +18,10 @@ export function App() {
 
                 <Route path='/tracker'>
                     <Tracker />                    
+                </Route>
+
+                <Route path='/admin'>
+                    <AdminPage/>                    
                 </Route>
 
                 <Route>
