@@ -45,7 +45,6 @@
     "react-validation": "^3.0.7",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
-    "uuid": "^8.3.2",
     "validator": "^13.7.0"
   }
 }
