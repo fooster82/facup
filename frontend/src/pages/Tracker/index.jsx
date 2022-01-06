@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './style.css';
 
+import UserService from "../../services/user.service";
 import { Map } from '../../components';
 import { Person } from '../../components';
 
@@ -22,8 +23,27 @@ export function Tracker() {
         fetchTeams()
     }, [])
 
+    const [ content, setContent ] = useState("");
+
+    useEffect(() => {
+        UserService.getUserContent().then(
+            res => {
+                setContent(res.data);
+            },
+            err => {
+                const _content =
+                    (err.res && err.res.data && err.res.data.message) ||
+                    err.message ||
+                    err.toString();
+
+                setContent(_content)
+            }
+        );
+    }, []);
+
     return (
         <div id='content'>
+            <h3>{content}</h3>
             <Map />
             <div id='person-div'>
                 <Person name='Rob' teams={["Quorn", "Quorn", "Ilkeston Town"]}/>                

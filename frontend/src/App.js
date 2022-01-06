@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { Header, Footer } from './layout';
-import { Home, Tracker, AdminPage } from './pages';
+import { Home, Login, Register, Profile, Tracker, AdminPage } from './pages';
 
 
 export function App() {
@@ -12,18 +12,18 @@ export function App() {
 
             <Switch>
 
-                <Route exact path='/'>
-                    <Home />
-                </Route>
+                <Route exact path={["/", "/home"]} component={Home} />
 
-                <Route path='/tracker'>
-                    <Tracker />                    
-                </Route>
+                <Route exact path="/login" component={Login} />
 
-                <Route path='/admin'>
-                    <AdminPage/>                    
-                </Route>
+                <Route exact path="/register" component={Register} />
 
+                <Route exact path="/profile" component={Profile} />
+
+                <Route path='/tracker' component={Tracker}/>
+                   
+                <Route path='/admin' component={AdminPage} />
+                  
                 <Route>
                     <h1>&#129429; This page doesn't exist &#129430;</h1>
                 </Route>
