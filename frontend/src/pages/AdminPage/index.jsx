@@ -1,32 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import './style.css';
 
-import UserService from "../../services/user.service";
 import { AddTeam } from '../../components';
 
 export function AdminPage() {
-    const [ content, setContent ] = useState("");
+    const [ showAdminContent, setShowAdminContent ] = useState(false);
+    const { user: currentUser } = useSelector(state => state.auth)
 
     useEffect(() => {
-        UserService.getAdminContent().then(
-            res => {
-                setContent(res.data);
-            },
-            err => {
-                const _content =
-                    (err.res && err.res.data && err.res.data.message) ||
-                    err.message ||
-                    err.toString();
-
-                setContent(_content)
-            }
-        );
-    }, []);
+        if (currentUser) {
+            setShowAdminContent(currentUser.roles.includes("ROLE_ADMIN"));
+        }
+    }, [currentUser]);
 
     return (
-        <div>
-            <h3>{content}</h3>
-            <AddTeam />
-        </div>
+        <>
+            <div className={showAdminContent ? 'show' : 'hide'}>
+                <AddTeam />
+            </div>
+
+            <h1 className={!showAdminContent ? 'show' : 'hide'}>Sorry but you don't have permission to view this page.</h1>
+        </>
     )
 }
