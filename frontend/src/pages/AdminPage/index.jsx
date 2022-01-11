@@ -6,7 +6,7 @@ import { AddTeam } from '../../components';
 
 export function AdminPage() {
     const [ showAdminContent, setShowAdminContent ] = useState(false);
-    const { user: currentUser } = useSelector(state => state.auth)
+    const { user: currentUser } = useSelector(state => state.auth);
 
     useEffect(() => {
         if (currentUser) {

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './style.css';
 
-import UserService from "../../services/user.service";
 import { Map } from '../../components';
 import { Person } from '../../components';
 
 export function Tracker() {
 
-    const [ teamsR, setTeamsR ] = useState([]);   
+    const [ teamsR, setTeamsR ] = useState([]);
+    const [ showUserContent, setShowUserContent ] = useState(false);
+    const { user: currentUser } = useSelector(state => state.auth);
+   
 
     useEffect(() => {
         const fetchTeams = async () => {
@@ -23,31 +26,22 @@ export function Tracker() {
         fetchTeams()
     }, [])
 
-    const [ content, setContent ] = useState("");
-
-    useEffect(() => {
-        UserService.getUserContent().then(
-            res => {
-                setContent(res.data);
-            },
-            err => {
-                const _content =
-                    (err.res && err.res.data && err.res.data.message) ||
-                    err.message ||
-                    err.toString();
-
-                setContent(_content)
-            }
-        );
-    }, []);
+    useEffect(() => {        
+        setShowUserContent(currentUser);        
+    }, [currentUser]);
 
     return (
-        <div id='content'>
-            <h3>{content}</h3>
-            <Map />
-            <div id='person-div'>
-                <Person name='Rob' teams={["Quorn", "Quorn", "Ilkeston Town"]}/>                
+        <>
+            <div className={showUserContent ? 'show' : 'hide'}>
+                <div id='content'>
+                    <Map />
+                    <div id='person-div'>
+                        <Person name='Rob' teams={["Quorn", "Quorn", "Ilkeston Town"]}/>
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <h1 className={!showUserContent ? 'show' : 'hide'}>Please login to view this page.</h1>
+        </>
     )
 }
