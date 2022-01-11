@@ -37,7 +37,7 @@ export function Header() {
     return (
         <header>
             <nav id='navbar'>
-                <NavLink exact to='/'>&#9917</NavLink>
+                <NavLink exact to='/'>&#9917;</NavLink>
 
                 <NavLink exact to='/home'>Home</NavLink>
 

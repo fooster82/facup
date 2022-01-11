@@ -23,7 +23,7 @@ const validEmail = value => {
     if (!isEmail(value)) {
         return (
             <div role="alert">
-                This is not a valid email.
+                Please enter a valid email address.
             </div>
         );
     }
@@ -33,17 +33,17 @@ const validUsername = value => {
     if (value.length < 3 || value.length > 20) {
         return (
             <div role="alert">
-                The username must be between 3 and 20 characters.
+                Your username must be between 3 and 20 characters.
             </div>
         );
     } 
 };
 
 const validPassword = value => {
-    if(value.length < 6 || value.length > 40) {
+    if(value.length < 6) {
         return (
             <div role="alert">
-                The password must be between 6 and 40 characters.
+                Your password must be more than 6 characters long.
             </div>
         );
     }
@@ -52,11 +52,16 @@ const validPassword = value => {
 export function Register() {
     const form = useRef();
     const checkBtn = useRef();
+    const passwordRef = useRef();
+    const emailRef = useRef();
 
     const [ username, setUsername ] = useState("");
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
+    const [ confirmPassword, setConfirmPassword] = useState("");
+    const [ confirmEmail, setConfirmEmail ] = useState("");
     const [ successful, setSuccessful ] = useState(false);
+    const [ showPassword, setShowPassword ] = useState(false);
   
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
@@ -75,6 +80,17 @@ export function Register() {
         const password = e.target.value;
         setPassword(password);
     };
+
+    const onChangeConfirmPassword = e => {
+        const confirmPassword = e.target.value;
+        setConfirmPassword(confirmPassword);
+    }
+
+    const onChangeConfirmEmail = e => {
+        const confirmEmail = e.target.value;
+        setConfirmEmail(confirmEmail);
+    }
+
     const handleRegister = e => {
         e.preventDefault();
 
@@ -92,6 +108,30 @@ export function Register() {
                 });
         }
     };
+        
+    const samePassword = value => {
+        const password = passwordRef.current.props.value;
+        if (value != password) {        
+            return (
+                <div role="alert">
+                    Your passwords must match.
+                </div>
+            );
+        }
+    }
+
+    const sameEmail = value => {
+        const email = emailRef.current.props.value;
+        if (value != email) {        
+            return (
+                <div role="alert">
+                    Your emails must match.
+                </div>
+            );
+        }
+    }
+
+    const handleButtonDown = () => setShowPassword(prevShowPassword => !prevShowPassword)
 
     return (
         <Form onSubmit={handleRegister} ref={form}>
@@ -111,6 +151,7 @@ export function Register() {
                     <label htmlFor="email">
                         Email:
                         <Input 
+                            ref={emailRef}
                             type="text"
                             name="email"
                             value={email}
@@ -119,16 +160,40 @@ export function Register() {
                         />
                     </label>
 
+                    <label htmlFor="confirmEmail">
+                        Confirm Email:
+                        <Input
+                            name="confirmEmail"
+                            value={confirmEmail}
+                            onChange={onChangeConfirmEmail}
+                            validations={[required, sameEmail]}
+                        />
+                    </label>
+
                     <label htmlFor="password">
                         Password:
                         <Input 
-                            type="text"
+                            ref={passwordRef}
+                            type={showPassword ? "text" : "password"}
                             name="password"
                             value={password}
                             onChange={onChangePassword}
                             validations={[required, validPassword]}
                         />
                     </label>
+
+                    <label htmlFor="confirmPassword">
+                        Confirm Password:
+                        <Input
+                            type={showPassword ? "text" : "password"}
+                            name="confirmPassword"
+                            value={confirmPassword}
+                            onChange={onChangeConfirmPassword}
+                            validations={[required, samePassword]}
+                        />
+                    </label>
+
+                    <button onMouseDown={handleButtonDown}>Show password</button>
                     
                     <button>Sign Up</button>
                 </div>
