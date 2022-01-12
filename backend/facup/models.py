@@ -1,7 +1,4 @@
 from django.db import models
-from django.db.models.deletion import SET_DEFAULT
-from django.db.models.fields import related
-from django.db.models.fields.json import JSONField
 
 class Team(models.Model):
     name = models.CharField(max_length=50)
@@ -12,8 +9,17 @@ class Team(models.Model):
     def __str__(self):
         return self.name
 
-class Stat(models.Model):
+class User(models.Model):
     username = models.CharField(max_length=20)
+    email = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    role = models.CharField(max_length=100, default="ROLE_USER")
+
+    def __str__(self):
+        return self.username
+
+class Stat(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name="user")
     team1 = models.ForeignKey(Team, on_delete=models.SET_NULL, blank=True, null=True, related_name="team1")
     team2 = models.ForeignKey(Team, on_delete=models.SET_NULL, blank=True, null=True, related_name="team2")
     team3 = models.ForeignKey(Team, on_delete=models.SET_NULL, blank=True, null=True, related_name="team3")

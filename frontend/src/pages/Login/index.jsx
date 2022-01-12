@@ -52,6 +52,7 @@ export function Login(props) {
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(login(username, password))
                 .then(() => {
+                    console.log("hello im supposed to be reloading")
                     props.history.push("/profile");
                     window.location.reload();
                 })

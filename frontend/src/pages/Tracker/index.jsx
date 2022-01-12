@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './style.css';
 
@@ -29,6 +30,10 @@ export function Tracker() {
     useEffect(() => {        
         setShowUserContent(currentUser);        
     }, [currentUser]);
+
+    if (!currentUser) {
+        return <Redirect to="/login" />
+    };
 
     return (
         <>

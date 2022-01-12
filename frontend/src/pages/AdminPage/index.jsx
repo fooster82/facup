@@ -5,12 +5,13 @@ import './style.css';
 import { AddTeam } from '../../components';
 
 export function AdminPage() {
+    
     const [ showAdminContent, setShowAdminContent ] = useState(false);
     const { user: currentUser } = useSelector(state => state.auth);
 
     useEffect(() => {
         if (currentUser) {
-            setShowAdminContent(currentUser.roles.includes("ROLE_ADMIN"));
+            setShowAdminContent(currentUser.role.includes("ROLE_ADMIN"));
         }
     }, [currentUser]);
 
