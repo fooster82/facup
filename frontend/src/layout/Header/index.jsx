@@ -27,6 +27,8 @@ export function Header() {
     useEffect(() => {
         if (currentUser) {
             setShowAdminContent(currentUser.role.includes("ROLE_ADMIN"));
+        } else {
+            setShowAdminContent(false)
         }
     }, [currentUser]);
 

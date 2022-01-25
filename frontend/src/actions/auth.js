@@ -43,10 +43,9 @@ export const register = (username, email, password) => dispatch => {
     );
 };
 
-export const login = (username, password) => dispatch => {
+export const logUserIn = (username, password) => dispatch => {
     return AuthService.login(username, password).then(
-        data => {         console.log(data)
-
+        data => {         
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: { user: data },

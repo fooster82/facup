@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import './style.css';
 
+import { SelectTeam } from '../../components/SelectTeam';
+
 export function Profile() {
     const { user: currentUser } = useSelector((state) => state.auth);
 
@@ -20,10 +22,8 @@ export function Profile() {
                 <strong>Email:</strong> {currentUser.email}
             </p>
             
+            <SelectTeam />
             
-            <p>
-                <strong>Role:</strong> {currentUser.role} 
-            </p>
         </div>
     )
 }

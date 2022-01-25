@@ -17,7 +17,7 @@ const required = value => {
     }
 };
 
-import { login } from "../../actions/auth";
+import { logUserIn } from "../../actions/auth";
 
 export function Login(props) {
     const form = useRef();
@@ -50,7 +50,7 @@ export function Login(props) {
         form.current.validateAll();
 
         if (checkBtn.current.context._errors.length === 0) {
-            dispatch(login(username, password))
+            dispatch(logUserIn(username, password))
                 .then(() => {
                     console.log("hello im supposed to be reloading")
                     props.history.push("/profile");

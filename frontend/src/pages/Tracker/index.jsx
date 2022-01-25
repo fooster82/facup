@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './style.css';
 
@@ -9,7 +9,7 @@ import { Person } from '../../components';
 
 export function Tracker() {
 
-    const [ teamsR, setTeamsR ] = useState([]);
+    const [ teams, setTeams ] = useState([]);
     const [ showUserContent, setShowUserContent ] = useState(false);
     const { user: currentUser } = useSelector(state => state.auth);
    
@@ -18,8 +18,9 @@ export function Tracker() {
         const fetchTeams = async () => {
             try {
                 let { data } = await axios.get('http://127.0.0.1:8000/api/stats/');
-                let teamDataR = data[0].team1;
-                setTeamsR(teamDataR);                
+                console.log(data)
+                let teamData = data[0].team1;
+                setTeams(teamData);                
             } catch (err) {
                 console.warn(err)
             }
@@ -41,7 +42,8 @@ export function Tracker() {
                 <div id='content'>
                     <Map />
                     <div id='person-div'>
-                        <Person name='Rob' teams={["Quorn", "Quorn", "Ilkeston Town"]}/>
+                        <NavLink exact to='/profile'>Add your teams!</NavLink>
+                        <Person name={currentUser.username} teams={[]}/>
                     </div>
                 </div>
             </div>
