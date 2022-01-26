@@ -20,8 +20,9 @@ from rest_framework import routers
 from facup import views
 
 router = routers.DefaultRouter()
-router.register(r'teams',views.TeamView, 'team')
-router.register(r'stats',views.StatView, 'stat')
+router.register(r'teams', views.TeamView, 'team')
+router.register(r'stats', views.StatView, 'stat')
+router.register(r'users', views.UserView, 'user')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
