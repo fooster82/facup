@@ -30,21 +30,22 @@ export function AddTeam() {
     return (
         <>
             <h1>Add a new team below!</h1>
+
             <form id="add-team-form" onSubmit={addTeam} >                
                 <label><b>Enter the team's name:</b>    
-                    <input type="text" placeholder="Team name" name="name" />    
+                    <input type="text" placeholder="Enter team name..." name="name" />    
                 </label> 
 
                 <label><b>Enter the team's ground name:</b>    
-                    <input type="text" placeholder="Ground name" name="ground" />    
+                    <input type="text" placeholder="Enter ground name..." name="ground" />    
                 </label> 
 
                 <label><b>Enter the ground's latitude:</b> 
-                    <input type="text" placeholder="Latitude" name="latitude" />    
+                    <input type="text" placeholder="Enter ground latitude..." name="latitude" />    
                 </label> 
 
                 <label><b>Enter the ground's longitude:</b>   
-                    <input type="text" placeholder="Longitude" name="longitude" />    
+                    <input type="text" placeholder="Enter ground longitude..." name="longitude" />    
                 </label> 
 
                 <input type="submit" name="submit" value="Add Team" />
