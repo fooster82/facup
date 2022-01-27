@@ -6,6 +6,7 @@ import axios from 'axios';
 export function SelectTeam() {
 
     const [ teams, setTeams ] = useState([]);
+    const [ word, setWord ] = useState("");
 
     const [ matchedEPR, setMatchedEPR ] = useState([]);
 
@@ -21,23 +22,43 @@ export function SelectTeam() {
         fetchTeams();
     }, []);
     
-    function findH(name) {
-        return name.includes('h') || name.includes('H');
-    }
-
     function findMatch(e) {
-        const letter = String.fromCharCode(e.keyCode)
-        const matchedTeams = teams.filter(name => {
-            return name.includes(letter) || name.includes(letter.toLowerCase())
-        })
-        setMatchedEPR(matchedTeams)
+        const code = e.keyCode
+        if (code === 8) {
+            // logic for a backspace
+            console.log("Im a backspace")
+        } else if (code === 32 || code === 222 || (code > 64 && code < 91) || (code > 47 && code < 58)) {
+            // logic for spacebar, single quote, letters and numbers
+
+            const newLetter = String.fromCharCode(code);
+            const newWord = word + newLetter
+            setWord(newWord)   
+            for (let i=0 ; i < newWord.length ; i++) {
+                const matchedTeams = teams.filter(name => {                
+                    // return name.includes(newWord[i]) || name.includes(newWord[i].toLowerCase());
+                    if (i === newWord.length - 1) {
+                        // logic for final letter
+                        if (name[i] === newWord[i]) {
+                            console.log(name[i])
+                            console.log(newWord[i])
+                            return name;
+                        }
+                    } else {
+                        if (name[i] === newWord[i]) {
+                            console.log("just checking if the prev letters match")
+                            true;
+                        }
+                    };
+                }); 
+                setMatchedEPR(matchedTeams)
+            }            
+        } else {
+            console.log("Im being annoying by being here")
+        }
     }
-
-
     
     return (
         <>
-            <div>All our teams  with an 'h' in are: {teams.filter(findH)}</div>
 
             <h1>Enter your teams below!</h1>
 
