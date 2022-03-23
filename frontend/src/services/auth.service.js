@@ -10,18 +10,18 @@ const register = (username, email, password) => {
     });
 };
 
-const login = (username, password) => {
-    checkUser(username, password)
-    .then(res => {
-        // if (res.accessToken) {
-        if (res.username != undefined || res.password != undefined) {
-            localStorage.setItem("user", JSON.stringify(res));
-        } 
-        // }
+const login = async (username, password) => { 
+    const userDetails = await checkUser(username, password);
 
-        return res;
-    })
-    .catch(err => console.log(err));
+    try {        
+        if (userDetails.username != undefined && userDetails.password != undefined) {
+            localStorage.setItem("user", JSON.stringify(userDetails));
+            return userDetails;
+        }        
+    } catch {
+        
+        throw new Error("Incorrect username or password!");
+    };
 };
 
 const logout = () => {

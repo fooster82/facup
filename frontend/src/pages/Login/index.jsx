@@ -48,13 +48,14 @@ export function Login(props) {
         setLoading(true);
 
         form.current.validateAll();
-
+        
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(logUserIn(username, password))
                 .then(() => {
-                    console.log("hello im supposed to be reloading")
+                    if (localStorage.getItem("user") === null) {
+                        console.log("hey hey hey");
+                    };
                     props.history.push("/profile");
-                    window.location.reload();
                 })
                 .catch(() => {
                     setLoading(false);
