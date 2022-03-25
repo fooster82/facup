@@ -19,7 +19,7 @@ class User(models.Model):
         return self.username
 
 class Stat(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name="user")
+    username = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name="user")
     year = models.IntegerField(default=0)
     team1 = models.ForeignKey(Team, on_delete=models.SET_NULL, blank=True, null=True, related_name="team1")
     team2 = models.ForeignKey(Team, on_delete=models.SET_NULL, blank=True, null=True, related_name="team2")
@@ -38,4 +38,4 @@ class Stat(models.Model):
 
 
     def __str__(self):
-        return self.username
+        return str(self.username)

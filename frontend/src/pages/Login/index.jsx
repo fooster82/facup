@@ -52,9 +52,6 @@ export function Login(props) {
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(logUserIn(username, password))
                 .then(() => {
-                    if (localStorage.getItem("user") === null) {
-                        console.log("hey hey hey");
-                    };
                     props.history.push("/profile");
                 })
                 .catch(() => {

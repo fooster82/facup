@@ -20,55 +20,50 @@ export function SelectTeam() {
             }
         }
         fetchTeams();
-    }, []);
-    
-    function findMatch(e) {
-        const code = e.keyCode
-        if (code === 8) {
-            // logic for a backspace
-            console.log("Im a backspace")
-        } else if (code === 32 || code === 222 || (code > 64 && code < 91) || (code > 47 && code < 58)) {
-            // logic for spacebar, single quote, letters and numbers
+    }, []);        
 
-            const newLetter = String.fromCharCode(code);
-            const newWord = word + newLetter
-            setWord(newWord)   
-            for (let i=0 ; i < newWord.length ; i++) {
-                const matchedTeams = teams.filter(name => {                
-                    // return name.includes(newWord[i]) || name.includes(newWord[i].toLowerCase());
-                    if (i === newWord.length - 1) {
-                        // logic for final letter
-                        if (name[i] === newWord[i]) {
-                            console.log(name[i])
-                            console.log(newWord[i])
-                            return name;
-                        }
-                    } else {
-                        if (name[i] === newWord[i]) {
-                            console.log("just checking if the prev letters match")
-                            true;
-                        }
-                    };
-                }); 
-                setMatchedEPR(matchedTeams)
-            }            
+    function findMatch (searchWord) {
+        setWord(searchWord); // Sets the current search term to what the user has typed
+
+        if (word != '') {
+            // Checks the teams in database for any matching entries
+            const matchedTeams = teams.filter(name => {
+                return Object.values(name).join(' ').toLowerCase().includes(searchWord.toLowerCase());
+            })
+
+            // Sets any matched entries to the matched teams array
+            setMatchedEPR(matchedTeams);
         } else {
-            console.log("Im being annoying by being here")
+            setMatchedEPR("No matches");
         }
+        
     }
     
     return (
         <>
-
             <h1>Enter your teams below!</h1>
 
             <form id="add-teams-form" onSubmit={e => {e.preventDefault(); console.log("hello")}} >                
                 <label><b>Extra Preliminary Round:</b>    
-                    <input onKeyUp={findMatch} type="text" placeholder="Enter team name..." name="EPR" />
+                    <input name="EPR"
+                        onChange={e => findMatch(e.target.value)} 
+                        type="text" 
+                        placeholder="Enter team name..."  
+                    />
                     <ul>
-                        {matchedEPR.map(i => (
-                            <li key={i.id}>{i}</li>
-                        ))}
+                        {word.length > 1 ? (
+                            matchedEPR.map(i => {
+                                return (
+                                    <li key={i.id}>{i}</li>
+                                )
+                            })
+                        ) : (
+                            teams.map(i => {
+                                return (
+                                    <li key={i.id}>{i}</li>
+                                )
+                            })
+                        )}
                     </ul>    
                 </label> 
 
@@ -129,3 +124,38 @@ export function SelectTeam() {
         </>
     );
 }
+
+// function findMatch(e) {
+    //     const code = e.keyCode
+    //     if (code === 8) {
+    //         // logic for a backspace
+    //         console.log("Im a backspace")
+    //     } else if (code === 32 || code === 222 || (code > 64 && code < 91) || (code > 47 && code < 58)) {
+    //         // logic for spacebar, single quote, letters and numbers
+
+    //         const newLetter = String.fromCharCode(code);
+    //         const newWord = word + newLetter
+    //         setWord(newWord)   
+    //         for (let i=0 ; i < newWord.length ; i++) {
+    //             const matchedTeams = teams.filter(name => {                
+    //                 // return name.includes(newWord[i]) || name.includes(newWord[i].toLowerCase());
+    //                 if (i === newWord.length - 1) {
+    //                     // logic for final letter
+    //                     if (name[i] === newWord[i]) {
+    //                         console.log(name[i])
+    //                         console.log(newWord[i])
+    //                         return name;
+    //                     }
+    //                 } else {
+    //                     if (name[i] === newWord[i]) {
+    //                         console.log("just checking if the prev letters match")
+    //                         true;
+    //                     }
+    //                 };
+    //             }); 
+    //             setMatchedEPR(matchedTeams)
+    //         }            
+    //     } else {
+    //         console.log("Im being annoying by being here")
+    //     }
+    // }
