@@ -12,6 +12,11 @@ sqlparse = "==0.4.2"
 tzdata = "==2021.5"
 Django = "==4.0"
 psycopg2 = "*"
+python-decouple = "*"
+django-heroku = "*"
+gunicorn = "*"
+whitenoise = "*"
+dj-database-url = "*"
 
 [dev-packages]
 
