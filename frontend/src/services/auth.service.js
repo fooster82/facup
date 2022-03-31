@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = "http://127.0.0.1:8000/api/";
+//const API_URL = "http://127.0.0.1:8000/api/";
+const API_URL = "https://facup.herokuapp.com/api";
 
 const register = (username, email, password) => {
     return axios.post(`${API_URL}users/`, {
@@ -18,8 +19,7 @@ const login = async (username, password) => {
             localStorage.setItem("user", JSON.stringify(userDetails));
             return userDetails;
         }        
-    } catch {
-        
+    } catch {        
         throw new Error("Incorrect username or password!");
     };
 };
