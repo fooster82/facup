@@ -1,1 +1,1 @@
-web: gunicorn facup.wsgi --log-file
+web: gunicorn facup.wsgi
