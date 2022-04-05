@@ -15,4 +15,7 @@
 
 ### Small things
 [] Sort out secret key to be read from .env instead of just visible
+[] Show password button submits the form
+[] No checks to stop users having the same user name
+[] Registering should have confirmation and log the user in or take them to the log in page
 [x] Get the django admin page working for the deploy
