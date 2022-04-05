@@ -12,3 +12,7 @@
 [] Match up a single drop-down with the logic currently on the home page that posts the data
 [] Match up all the drop-down menus with the logic
 [] Add an if-loop that checks if a user already has team data --> patch if they do, post if they don't
+
+### Small things
+[] Sort out secret key to be read from .env instead of just visible
+[x] Get the django admin page working for the deploy

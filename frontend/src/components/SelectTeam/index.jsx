@@ -13,7 +13,7 @@ export function SelectTeam() {
     useEffect(() => {
         const fetchTeams = async () => {
             try {
-                let { data } = await axios.get('http://127.0.0.1:8000/api/teams/');
+                let { data } = await axios.get('https://facup.herokuapp.com/api/teams/');
                 data.forEach(d => setTeams(prev => [...prev, d.name]));
             } catch (err) {
                 console.warn(err);

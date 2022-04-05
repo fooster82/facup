@@ -17,8 +17,8 @@ export function Home() {
     useEffect(() => {
         const fetchUsersAndTeams = async () => {
             try {
-                let userData = await axios.get('http://127.0.0.1:8000/api/users/');
-                let teamData = await axios.get('http://127.0.0.1:8000/api/teams/');
+                let userData = await axios.get('https://facup.herokuapp.com/api/users/');
+                let teamData = await axios.get('https://facup.herokuapp.com/api/teams/');
                 
                 setUsers(userData);
                 setTeams(teamData);
@@ -55,7 +55,7 @@ export function Home() {
 
         // Post the above details to set the user's teams
         try {
-            await axios.post('http://127.0.0.1:8000/api/stats/', {
+            await axios.post('https://facup.herokuapp.com/api/stats/', {
                     user: username,
                     year: date,
                     team1: teamToAdd.id,

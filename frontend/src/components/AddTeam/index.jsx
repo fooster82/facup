@@ -8,7 +8,7 @@ export function AddTeam() {
     const addTeam = async e => {
         e.preventDefault();
         try {
-            await axios.post('http://127.0.0.1:8000/api/teams/', {
+            await axios.post('https://facup.herokuapp.com/api/teams/', {
                 name: e.target[0].value,
                 ground: e.target[1].value,
                 latitude: e.target[2].value,

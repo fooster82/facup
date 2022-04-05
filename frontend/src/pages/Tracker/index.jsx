@@ -17,7 +17,7 @@ export function Tracker() {
     useEffect(() => {
         const fetchTeams = async () => {
             try {
-                let { data } = await axios.get('http://127.0.0.1:8000/api/stats/');
+                let { data } = await axios.get('https://facup.herokuapp.com/api/stats/');
                 console.log(data)
                 let teamData = data[0].team1;
                 setTeams(teamData);                
