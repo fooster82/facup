@@ -35,8 +35,7 @@ export function SelectTeam() {
             setMatchedEPR(matchedTeams);
         } else {
             setMatchedEPR("No matches");
-        }
-        
+        }        
     }
     
     return (

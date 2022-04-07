@@ -1,3 +1,35 @@
 #dropdown-menu {
+    width: 150px;
+}
+
+#dropdown-form {
     cursor: default;
+    border-color: black;
+    width: 143px;
+}
+
+#dropdown-form:focus {
+    outline: none;
+    border: 2px solid black;
+}
+
+#dropdown-list {
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    border: 2px solid black;
+}
+
+.dropdown-item {
+    width: inherit;
+    border: 0;
+    background-color: black;
+    color: white;
+    font-weight: 800;
+    padding: 10px, 0;
+    text-overflow: unset;
+}
+
+.dropdown-item:hover {
+    background: grey;
 }

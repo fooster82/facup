@@ -2,10 +2,11 @@
 
 ## To-do
 ### Drop-down menu
-[] Get the drop-down menus to load in all the available teams
+[x] Team data is undefined
+[x] Get the drop-down menus to load in all the available teams
 [] When a user starts to type, select the team that best matches what they've typed so far
-[] When selected, set the input box to that team
-[] Allow a user to also just click a team to select it which also closes the menu
+[x] When selected, set the input box to that team
+[x] Allow a user to also just click a team to select it which also closes the menu
 
 ### Add teams
 [] Add the drop-down components for each round to the tracker page
@@ -15,6 +16,7 @@
 
 ### Small things
 [] Sort out secret key to be read from .env instead of just visible
+[] Make the dropdown menu items have a scroll bar instead of just loading them all in
 [] Show password button submits the form
 [] No checks to stop users having the same user name
 [] Registering should have confirmation and log the user in or take them to the log in page
