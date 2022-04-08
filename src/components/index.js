@@ -4,4 +4,4 @@ export { DropdownMenu } from './DropdownMenu';
 export { Map } from './Map';
 export { Person } from './Person';
 export { Rules } from './Rules';
-export { SelectTeam } from './SelectTeam';
+export { SelectTeams } from './SelectTeams';
