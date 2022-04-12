@@ -10,14 +10,13 @@ export function DropdownMenu(props) {
     const addTeam = props.addTeam
 
     const [ showMenu, setShowMenu ] = useState(false);
-    const [ teamToAdd, setTeamToAdd ] = useState(null);
     const [ teams, setTeams ] = useState([]);
     const [ teamNames, setTeamNames ] = useState([])
 
     const teamsMenu = useRef();
     const dropdownForm = useRef();
     const teamButtons = useMemo(() => Array(teams.length).fill(0).map(() => createRef()), []);
-
+    
     // Get all the team names from the DB
     useEffect(() => {
         const fetchTeams = async () => {
@@ -47,13 +46,12 @@ export function DropdownMenu(props) {
         let selectedTeam = team;
         dropdownForm.current.value = selectedTeam;
         
-         setTeamToAdd(matchTeam(selectedTeam)); // Try to match the current search term to a team in the DB        
-
-        addTeam("butts") // Sends the team to add back to the parent component
+        const matchedTeam = matchTeam(selectedTeam); // Try to match the current search term to a team in the DB  
+        addTeam(matchedTeam) // Sends the team to add back to the parent component
 
         setShowMenu(false); // Close the menu when a team is selected
     }
-
+    
     // Finds a team that best matches what the user has currently typed in
     function findMatch (searchWord) {
         const teamButtonRefs = teamButtons.current.children; // Stores each of the team buttons in a variable

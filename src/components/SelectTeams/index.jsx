@@ -39,8 +39,7 @@ export function SelectTeams() {
     async function postTeams(e) {
         e.preventDefault(); // Stops the button just reloading the page
 
-        // Get the current year
-        let date = new Date().getFullYear()
+        let date = new Date().getFullYear() // Get the current year
     
         // Set the ID of the current user and get their username
         let userId = JSON.parse(localStorage.getItem("user")).id  
@@ -71,30 +70,42 @@ export function SelectTeams() {
         }
     }
     
-    const setTeam1Callback = (teamToAdd) => setTeam1(teamToAdd);
-    const logTeam = () => console.log(team1);
+    // Callback funtion for each round, which is called in the dropdown menu component
+    const setTeam1Callback = teamToAdd => setTeam1(teamToAdd);
+    const setTeam2Callback = teamToAdd => setTeam2(teamToAdd);
+    const setTeam3Callback = teamToAdd => setTeam3(teamToAdd);
+    const setTeam4Callback = teamToAdd => setTeam4(teamToAdd);
+    const setTeam5Callback = teamToAdd => setTeam5(teamToAdd);
+    const setTeam6Callback = teamToAdd => setTeam6(teamToAdd);
+    const setTeam7Callback = teamToAdd => setTeam7(teamToAdd);
+    const setTeam8Callback = teamToAdd => setTeam8(teamToAdd);
+    const setTeam9Callback = teamToAdd => setTeam9(teamToAdd);
+    const setTeam10Callback = teamToAdd => setTeam10(teamToAdd);
+    const setTeam11Callback = teamToAdd => setTeam11(teamToAdd);
+    const setTeam12Callback = teamToAdd => setTeam12(teamToAdd);
+    const setTeam13Callback = teamToAdd => setTeam13(teamToAdd);
+    const setTeam14Callback = teamToAdd => setTeam14(teamToAdd);
     
     return (
         <>
             <h1>Enter your teams below!</h1>
-            <button onClick={logTeam}>log</button>
 
             <form id="add-teams-form" onSubmit={e => {postTeams(e)}} >         
 
                 <DropdownMenu addTeam={setTeam1Callback} round={'Extra Preliminary Round'} name={'EPR'}/>
-                <DropdownMenu round={'Preliminary Round'} name={'PR'}/>
-                <DropdownMenu round={'First Round Qualifying'} name={'Q1'}/>
-                <DropdownMenu round={'Second Round Qualifying'} name={'Q2'}/>
-                <DropdownMenu round={'Third Round Qualifying'} name={'Q3'}/>
-                <DropdownMenu round={'Fourth Round Qualifying'} name={'Q4'}/>
-                <DropdownMenu round={'First Round'} name={'R1'}/>
-                <DropdownMenu round={'Second Round'} name={'R2'}/>
-                <DropdownMenu round={'Third Round'} name={'R3'}/>
-                <DropdownMenu round={'Fourth Round'} name={'R4'}/>
-                <DropdownMenu round={'Fifth Round'} name={'R5'}/>
-                <DropdownMenu round={'Quarter-Final'} name={'QF'}/>
-                <DropdownMenu round={'Semi-Final'} name={'SF'}/>
-                <DropdownMenu round={'Final'} name={'F'}/>
+                <DropdownMenu addTeam={setTeam2Callback} round={'Preliminary Round'} name={'PR'}/>
+                <DropdownMenu addTeam={setTeam3Callback} round={'First Round Qualifying'} name={'Q1'}/>
+                <DropdownMenu addTeam={setTeam4Callback} round={'Second Round Qualifying'} name={'Q2'}/>
+                <DropdownMenu addTeam={setTeam5Callback} round={'Third Round Qualifying'} name={'Q3'}/>
+                <DropdownMenu addTeam={setTeam6Callback} round={'Fourth Round Qualifying'} name={'Q4'}/>
+                <DropdownMenu addTeam={setTeam7Callback} round={'First Round'} name={'R1'}/>
+                <DropdownMenu addTeam={setTeam8Callback} round={'Second Round'} name={'R2'}/>
+                <DropdownMenu addTeam={setTeam9Callback} round={'Third Round'} name={'R3'}/>
+                <DropdownMenu addTeam={setTeam10Callback} round={'Fourth Round'} name={'R4'}/>
+                <DropdownMenu addTeam={setTeam11Callback} round={'Fifth Round'} name={'R5'}/>
+                <DropdownMenu addTeam={setTeam12Callback} round={'Quarter-Final'} name={'QF'}/>
+                <DropdownMenu addTeam={setTeam13Callback} round={'Semi-Final'} name={'SF'}/>
+                <DropdownMenu addTeam={setTeam14Callback} round={'Final'} name={'F'}/>
 
                 <input type="submit" name="submit" value="Add Teams" />
             </form>
