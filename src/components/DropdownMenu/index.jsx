@@ -71,7 +71,7 @@ export function DropdownMenu(props) {
         let matchedTeam = teams.find(team => team.name.toLowerCase() === possibleTeam.toLowerCase()); // Search the DB for the team
 
         if(matchedTeam != undefined) return matchedTeam; // If there is a match then return it
-        else return null;
+        else return 'boobs';
     } 
     
     return (

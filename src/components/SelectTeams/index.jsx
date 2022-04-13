@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './style.css';
 
-import axios
- from 'axios';
+import axios from 'axios';
 import { DropdownMenu } from '../DropdownMenu';
 
 export function SelectTeams() {  
-    const [ users, setUsers ] = useState([]);
 
     const [ team1, setTeam1] = useState(null);
     const [ team2, setTeam2] = useState(null);
@@ -21,20 +19,7 @@ export function SelectTeams() {
     const [ team11, setTeam11] = useState(null);
     const [ team12, setTeam12] = useState(null);
     const [ team13, setTeam13] = useState(null);
-    const [ team14, setTeam14] = useState(null);
-
-    useEffect(() => {
-        const fetchTeams = async () => {
-            try {
-                let userData = await axios.get('https://facup.herokuapp.com/api/users/');
-                
-                setUsers(userData);
-            } catch (err) {
-                console.warn(err);
-            }
-        }
-        fetchTeams();
-    }, []);  
+    const [ team14, setTeam14] = useState(null);   
 
     async function postTeams(e) {
         e.preventDefault(); // Stops the button just reloading the page
@@ -46,7 +31,8 @@ export function SelectTeams() {
 
         // Post the above details to set the user's teams
         try {
-            await axios.post('https://facup.herokuapp.com/api/stats/', {
+            console.log(team1)
+            await axios.post('https://facup.herokuapp.com/api/stats/', {                
                     username: userId,
                     year: date,
                     team1: team1.id,
