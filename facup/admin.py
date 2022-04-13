@@ -8,6 +8,9 @@ class TeamAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', 'password', 'role')
 
-admin.site.register(Stat)
+class StatAdmin(admin.ModelAdmin):
+    list_display = ('username', 'year')
+
+admin.site.register(Stat, StatAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(User, UserAdmin)
