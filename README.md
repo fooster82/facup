@@ -5,8 +5,10 @@
 ### Add teams
 [x] Add the drop-down components for each round to the tracker page
 [x] Change the flow of state data for TeamToAdd from parent (SelectTeams) to child (DropdownMenu(s))
-[] Match up a single drop-down with the logic currently on the home page that posts the data
-[] Match up all the drop-down menus with the logic
+[x] Match up a single drop-down with the logic currently on the home page that posts the data
+[x] Match up all the drop-down menus with the logic
+[] Error handling for incorrect and empty entries
+[] Null entires don't work, should be possible for rounds that haven't been drawn yet
 [] Add an if-loop that checks if a user already has team data --> patch if they do, post if they don't
 
 ### Small things
