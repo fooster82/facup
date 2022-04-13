@@ -46,14 +46,8 @@ export function DropdownMenu(props) {
         let selectedTeam = team;
         dropdownForm.current.value = selectedTeam;
         
-<<<<<<< HEAD
-        setTeamToAdd(matchTeam(selectedTeam)); // Try to match the current search term to a team in the DB        
-        console.log(teamToAdd)
-        addTeam("bulls") // Sends the team to add back to the parent component
-=======
         const matchedTeam = matchTeam(selectedTeam); // Try to match the current search term to a team in the DB  
         addTeam(matchedTeam) // Sends the team to add back to the parent component
->>>>>>> fc313979d516d3bdc3ce1b6e0ca3f1665e89a431
 
         setShowMenu(false); // Close the menu when a team is selected
     }

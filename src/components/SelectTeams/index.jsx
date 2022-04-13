@@ -43,28 +43,27 @@ export function SelectTeams() {
     
         // Set the ID of the current user and get their username
         let userId = JSON.parse(localStorage.getItem("user")).id  
-        let username = users.data.find(user => user.id === userId).username;
 
         // Post the above details to set the user's teams
         try {
-            // await axios.post('https://facup.herokuapp.com/api/stats/', {
-            //         user: username,
-            //         year: date,
-            //         team1: team1.id,
-            //         team2: team2.id,
-            //         team3: team3.id,
-            //         team4: team4.id,
-            //         team5: team5.id,
-            //         team6: team6.id,
-            //         team7: team7.id,
-            //         team8: team8.id,
-            //         team9: team9.id,
-            //         team10: team10.id,
-            //         team11: team11.id,
-            //         team12: team12.id,
-            //         team13: team13.id,
-            //         team14: team14.id,
-            //     })
+            await axios.post('https://facup.herokuapp.com/api/stats/', {
+                    username: userId,
+                    year: date,
+                    team1: team1.id,
+                    team2: team2.id,
+                    team3: team3.id,
+                    team4: team4.id,
+                    team5: team5.id,
+                    team6: team6.id,
+                    team7: team7.id,
+                    team8: team8.id,
+                    team9: team9.id,
+                    team10: team10.id,
+                    team11: team11.id,
+                    team12: team12.id,
+                    team13: team13.id,
+                    team14: team14.id,
+                })
         } catch(err) {
             console.log(err);
         }
