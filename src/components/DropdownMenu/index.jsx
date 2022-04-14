@@ -79,7 +79,7 @@ export function DropdownMenu(props) {
     // Handle the clicks to open and close the dropdown menu
     function openAndCloseMenu() {
         setShowMenu(!showMenu); // Open and close the menu
-       !!dropdownForm.current.focus()
+        
         // Sort the team names into alphabetical order
         const alphabetisedTeamNames = teamNames.sort((a,b) => {
             const teamNameA = a.toLowerCase();

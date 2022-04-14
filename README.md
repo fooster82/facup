@@ -12,12 +12,14 @@
 [x] Change the flow of state data for TeamToAdd from parent (SelectTeams) to child (DropdownMenu(s))
 [x] Match up a single drop-down with the logic currently on the home page that posts the data
 [x] Match up all the drop-down menus with the logic
-[] Stats should be added by season not year
+[x] Stats should be added by season not year
 [x] Null entires don't work, should be possible for rounds that haven't been drawn yet
+* Started the below in SelectTeams but it currently is struggling to match up a user with the stats, maybe useEffect isn't the right way to do it...*
 [] Add an if-loop that checks if a user already has team data --> patch if they do, post if they don't
-[] Confirmation banner appears after a stat has been added
+[x] Confirmation banner appears after a stat has been added
 
 ### Small things
+- Turn the confirmation banners for add teams and add stats to be a green banner not a window alert
 - Sort out secret key to be read from .env instead of just visible
 - Make the dropdown menu items have a scroll bar instead of just loading them all in
 - Dropdown menu doesn't lose focus when the teams are hidden from clicking the input box

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 
 import axios from 'axios';
@@ -19,8 +19,48 @@ export function SelectTeams() {
     const [ team11, setTeam11] = useState(null);
     const [ team12, setTeam12] = useState(null);
     const [ team13, setTeam13] = useState(null);
-    const [ team14, setTeam14] = useState(null);   
+    const [ team14, setTeam14] = useState(null);  
+    
+    const [ hasTeams, setHasTeams ] = useState(false);
+    const [ stats, setStats ] = useState([])
+    const [ users, setUsers ] = useState([])
 
+    // Get all the stats data from the DB
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                let { data } = await axios.get('https://facup.herokuapp.com/api/stats/');
+                data.forEach(s => setStats(prev => [...prev, s]));
+            } catch (err) {
+                console.warn(err);
+            }
+        } 
+        fetchStats();        
+    }, []) 
+
+    // Get all the users data from the DB
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                let { data } = await axios.get('https://facup.herokuapp.com/api/users/');
+                data.forEach(u => setUsers(prev => [...prev, u]));
+            } catch (err) {
+                console.warn(err);
+            }
+        } 
+        fetchUsers();        
+    }, []) 
+
+    useEffect(() => {
+       const matchedUser = stats.find(stat => {
+           const userId = stat.username;
+           const username = users.find(user => user.id === userId).username;
+           return username === JSON.parse(localStorage.getItem("user")).username // Find the matched user
+       })
+       console.log(`matched user is: ${matchedUser}`)
+       if (matchedUser != undefined) consolelog("hello"); // If a user already has stats in the DB then dont show the add teams
+    }) 
+    
     async function postTeams(e) {
         e.preventDefault(); // Stops the button just reloading the page
 
@@ -33,8 +73,8 @@ export function SelectTeams() {
             else return `${currentYear}/${currentYear + 1}`
         }
 
-        let season = setSeason();
-        console.log(season)
+        let season = setSeason(); // Sets the current season
+
         // Set the ID of the current user and get their username
         let userId = JSON.parse(localStorage.getItem("user")).id  
 
@@ -69,6 +109,8 @@ export function SelectTeams() {
                     team13: teamIds[12],
                     team14: teamIds[12],
                 })
+
+                window.alert("Your teams have been added to your profile! Go to the tracker page to check them out...")
         } catch(err) {
             console.log(err);
         }
@@ -92,27 +134,39 @@ export function SelectTeams() {
     
     return (
         <>
-            <h1>Enter your teams below!</h1>
+            {
+                hasTeams 
+                    ? 
+                    (
+                        <></>
+                    )
+                    :
+                    (
+                        <>
+                        <h1>Enter your teams below!</h1>
 
-            <form id="add-teams-form" onSubmit={e => {postTeams(e)}} >         
+                        <form id="add-teams-form" onSubmit={e => {postTeams(e)}} >         
 
-                <DropdownMenu addTeam={setTeam1Callback} round={'Extra Preliminary Round'} name={'EPR'}/>
-                <DropdownMenu addTeam={setTeam2Callback} round={'Preliminary Round'} name={'PR'}/>
-                <DropdownMenu addTeam={setTeam3Callback} round={'First Round Qualifying'} name={'Q1'}/>
-                <DropdownMenu addTeam={setTeam4Callback} round={'Second Round Qualifying'} name={'Q2'}/>
-                <DropdownMenu addTeam={setTeam5Callback} round={'Third Round Qualifying'} name={'Q3'}/>
-                <DropdownMenu addTeam={setTeam6Callback} round={'Fourth Round Qualifying'} name={'Q4'}/>
-                <DropdownMenu addTeam={setTeam7Callback} round={'First Round'} name={'R1'}/>
-                <DropdownMenu addTeam={setTeam8Callback} round={'Second Round'} name={'R2'}/>
-                <DropdownMenu addTeam={setTeam9Callback} round={'Third Round'} name={'R3'}/>
-                <DropdownMenu addTeam={setTeam10Callback} round={'Fourth Round'} name={'R4'}/>
-                <DropdownMenu addTeam={setTeam11Callback} round={'Fifth Round'} name={'R5'}/>
-                <DropdownMenu addTeam={setTeam12Callback} round={'Quarter-Final'} name={'QF'}/>
-                <DropdownMenu addTeam={setTeam13Callback} round={'Semi-Final'} name={'SF'}/>
-                <DropdownMenu addTeam={setTeam14Callback} round={'Final'} name={'F'}/>
+                            <DropdownMenu addTeam={setTeam1Callback} round={'Extra Preliminary Round'} name={'EPR'}/>
+                            <DropdownMenu addTeam={setTeam2Callback} round={'Preliminary Round'} name={'PR'}/>
+                            <DropdownMenu addTeam={setTeam3Callback} round={'First Round Qualifying'} name={'Q1'}/>
+                            <DropdownMenu addTeam={setTeam4Callback} round={'Second Round Qualifying'} name={'Q2'}/>
+                            <DropdownMenu addTeam={setTeam5Callback} round={'Third Round Qualifying'} name={'Q3'}/>
+                            <DropdownMenu addTeam={setTeam6Callback} round={'Fourth Round Qualifying'} name={'Q4'}/>
+                            <DropdownMenu addTeam={setTeam7Callback} round={'First Round'} name={'R1'}/>
+                            <DropdownMenu addTeam={setTeam8Callback} round={'Second Round'} name={'R2'}/>
+                            <DropdownMenu addTeam={setTeam9Callback} round={'Third Round'} name={'R3'}/>
+                            <DropdownMenu addTeam={setTeam10Callback} round={'Fourth Round'} name={'R4'}/>
+                            <DropdownMenu addTeam={setTeam11Callback} round={'Fifth Round'} name={'R5'}/>
+                            <DropdownMenu addTeam={setTeam12Callback} round={'Quarter-Final'} name={'QF'}/>
+                            <DropdownMenu addTeam={setTeam13Callback} round={'Semi-Final'} name={'SF'}/>
+                            <DropdownMenu addTeam={setTeam14Callback} round={'Final'} name={'F'}/>
 
-                <input type="submit" name="submit" value="Add Teams" />
-            </form>
+                            <input type="submit" name="submit" value="Add Teams" />
+                        </form>
+                        </>
+                    )
+            }
         </>
-    );
+    )
 }
