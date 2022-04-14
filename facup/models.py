@@ -20,7 +20,7 @@ class User(models.Model):
 
 class Stat(models.Model):
     username = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name="user")
-    year = models.IntegerField(default=0)
+    year = models.CharField(max_length=10)
     team1 = models.ForeignKey(Team, on_delete=models.SET_NULL, blank=True, null=True, related_name="team1")
     team2 = models.ForeignKey(Team, on_delete=models.SET_NULL, blank=True, null=True, related_name="team2")
     team3 = models.ForeignKey(Team, on_delete=models.SET_NULL, blank=True, null=True, related_name="team3")
