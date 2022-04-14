@@ -23,14 +23,14 @@ export function DropdownMenu(props) {
             try {
                 let { data } = await axios.get('https://facup.herokuapp.com/api/teams/');
                 data.forEach(t => setTeams(prev => [...prev, t]));
-                data.forEach(t => setTeamNames(prev => [...prev, t.name]));                
+                data.forEach(t => setTeamNames(prev => [...prev, t.name])); // Put all the team names into a seperate array             
             } catch (err) {
                 console.warn(err);
             }
         } 
         fetchTeams();        
-    }, []) 
-    
+    }, [])    
+
     // Adds the event listener for the closing functionality of the drop down menu
     useEffect(() => {
         const handleClickOutside = e => {
@@ -39,13 +39,13 @@ export function DropdownMenu(props) {
             };
         };
         document.addEventListener("click", handleClickOutside);
-    }, []);
+    }, []);    
 
     // When a user clicks one of the team buttons, add that team to the matching text input field
      function handleClick(team) {
         let selectedTeam = team;
         dropdownForm.current.value = selectedTeam;
-        
+
         const matchedTeam = matchTeam(selectedTeam); // Try to match the current search term to a team in the DB  
         addTeam(matchedTeam) // Sends the team to add back to the parent component
 
@@ -54,6 +54,8 @@ export function DropdownMenu(props) {
     
     // Finds a team that best matches what the user has currently typed in
     function findMatch (searchWord) {
+        console.log("test")
+
         const teamButtonRefs = teamButtons.current.children; // Stores each of the team buttons in a variable
 
         Array.from(teamButtonRefs).forEach(button => button.disabled = false); // Enables all buttons
@@ -71,8 +73,24 @@ export function DropdownMenu(props) {
         let matchedTeam = teams.find(team => team.name.toLowerCase() === possibleTeam.toLowerCase()); // Search the DB for the team
 
         if(matchedTeam != undefined) return matchedTeam; // If there is a match then return it
-        else return 'boobs';
+        else return null;
     } 
+
+    // Handle the clicks to open and close the dropdown menu
+    function openAndCloseMenu() {
+        setShowMenu(!showMenu); // Open and close the menu
+       !!dropdownForm.current.focus()
+        // Sort the team names into alphabetical order
+        const alphabetisedTeamNames = teamNames.sort((a,b) => {
+            const teamNameA = a.toLowerCase();
+            const teamNameB = b.toLowerCase();
+            
+            if (teamNameA < teamNameB) return -1 // teamNameA comes first
+            else if (teamNameA > teamNameB) return 1 // teamNameB comes first
+            else return 0 // The names are equal    
+        });
+        setTeamNames(alphabetisedTeamNames);
+    };
     
     return (
     <div id='dropdown-menu' ref={teamsMenu}>
@@ -83,7 +101,7 @@ export function DropdownMenu(props) {
             name={name}
             type="text" 
             placeholder="-------------               &#9660;" 
-            onClick={() => setShowMenu(!showMenu)}  
+            onClick={openAndCloseMenu}       
             onChange={e => findMatch(e.target.value)}                       
         />
         {

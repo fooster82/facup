@@ -24,31 +24,50 @@ export function SelectTeams() {
     async function postTeams(e) {
         e.preventDefault(); // Stops the button just reloading the page
 
-        let date = new Date().getFullYear() // Get the current year
-    
+        let currentYear = new Date().getFullYear() // Get the current year
+        let currentMonth =  new Date().getMonth(); // Get the current month
+
+        // Set the current season depending on what month it is
+        function setSeason() {
+            if (currentMonth < 7) return `${currentYear - 1}/${currentYear}`;
+            else return `${currentYear}/${currentYear + 1}`
+        }
+
+        let season = setSeason();
+        console.log(season)
         // Set the ID of the current user and get their username
         let userId = JSON.parse(localStorage.getItem("user")).id  
 
         // Post the above details to set the user's teams
         try {
-            console.log(team1)
+            const teams= [team1, team2, team3, team4, team5, team6, team7, team8, team9, team10, team11, team12, team13, team14] // Collect all the teams to be added in an array
+            const teamIds = [null, null, null, null, null, null, null, null, null, null, null, null, null, null] // Initlise an array of the team Ids as null
+
+            // Loop through the teams array setting the Id of any non-null values to its corresponding value in teamIds
+            for (let i=0; i<teams.length; i++) {
+                if(teams[i] != null || teams[i] != undefined) {
+                    teamIds[i] = teams[i].id;
+                }
+            }
+            
+            // Post the user's team stat data to the DB along with their username and the current date
             await axios.post('https://facup.herokuapp.com/api/stats/', {                
                     username: userId,
-                    year: date,
-                    team1: team1.id,
-                    team2: team2.id,
-                    team3: team3.id,
-                    team4: team4.id,
-                    team5: team5.id,
-                    team6: team6.id,
-                    team7: team7.id,
-                    team8: team8.id,
-                    team9: team9.id,
-                    team10: team10.id,
-                    team11: team11.id,
-                    team12: team12.id,
-                    team13: team13.id,
-                    team14: team14.id,
+                    year: season,
+                    team1: teamIds[0],
+                    team2: teamIds[1],
+                    team3: teamIds[2],
+                    team4: teamIds[3],
+                    team5: teamIds[4],
+                    team6: teamIds[5],
+                    team7: teamIds[6],
+                    team8: teamIds[7],
+                    team9: teamIds[8],
+                    team10: teamIds[9],
+                    team11: teamIds[10],
+                    team12: teamIds[11],
+                    team13: teamIds[12],
+                    team14: teamIds[12],
                 })
         } catch(err) {
             console.log(err);
