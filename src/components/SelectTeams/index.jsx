@@ -54,12 +54,13 @@ export function SelectTeams() {
     useEffect(() => {
        const matchedUser = stats.find(stat => {
            const userId = stat.username;
-           const username = users.find(user => user.id === userId).username;
-           return username === JSON.parse(localStorage.getItem("user")).username // Find the matched user
+           console.log(users.find(user => user.id === userId))
+           //const username = users.find(user => user.id === userId).username;
+           //return username === JSON.parse(localStorage.getItem("user")).username // Find the matched user
        })
-       console.log(`matched user is: ${matchedUser}`)
-       if (matchedUser != undefined) consolelog("hello"); // If a user already has stats in the DB then dont show the add teams
-    }) 
+       //console.log(`matched user is: ${matchedUser}`)
+       if (matchedUser != undefined) console.log("hello"); // If a user already has stats in the DB then dont show the add teams
+    }, [users]) 
     
     async function postTeams(e) {
         e.preventDefault(); // Stops the button just reloading the page
@@ -110,7 +111,7 @@ export function SelectTeams() {
                     team14: teamIds[12],
                 })
 
-                window.alert("Your teams have been added to your profile! Go to the tracker page to check them out...")
+                window.alert("Your teams have been added to your profile! Go to the tracker page to check them out.")
         } catch(err) {
             console.log(err);
         }
