@@ -15,7 +15,8 @@
 [x] Stats should be added by season not year
 [x] Null entires don't work, should be possible for rounds that haven't been drawn yet
 * Started the below in SelectTeams but it currently is struggling to match up a user with the stats, maybe useEffect isn't the right way to do it...*
-[] Add an if-loop that checks if a user already has team data --> patch if they do, post if they don't
+[] Add an if-loop that checks if a user already has team data 
+[] Show a different UI depending on if a user has stats or not
 [x] Confirmation banner appears after a stat has been added
 
 ### Small things

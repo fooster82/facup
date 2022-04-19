@@ -52,16 +52,26 @@ export function SelectTeams() {
     }, []) 
 
     useEffect(() => {
-       const matchedUser = stats.find(stat => {
-           const userId = stat.username;
-           console.log(users.find(user => user.id === userId))
-           //const username = users.find(user => user.id === userId).username;
-           //return username === JSON.parse(localStorage.getItem("user")).username // Find the matched user
-       })
-       //console.log(`matched user is: ${matchedUser}`)
-       if (matchedUser != undefined) console.log("hello"); // If a user already has stats in the DB then dont show the add teams
+        const currentUser = JSON.parse(localStorage.getItem("user")); // Current user that is logged in
+        
+        matchUser(currentUser.id); // Attempt to match that user with ones that have a stat entry     
     }, [users]) 
     
+    function matchUser(userId) {
+        // Find the matching user in the DB
+        const user = stats.find(stat => {
+                if (stat != undefined) {
+                    console.log(stat.username === userId)
+                    stat.username === userId;
+                }
+            }) 
+        console.log(user)
+
+        // Change the state of hasTeams depending on whether there is a matching user or not
+        // if (user != undefined) setHasTeams(true);
+        // else setHasTeams(false);            
+    }
+
     async function postTeams(e) {
         e.preventDefault(); // Stops the button just reloading the page
 
@@ -82,7 +92,8 @@ export function SelectTeams() {
         // Post the above details to set the user's teams
         try {
             const teams= [team1, team2, team3, team4, team5, team6, team7, team8, team9, team10, team11, team12, team13, team14] // Collect all the teams to be added in an array
-            const teamIds = [null, null, null, null, null, null, null, null, null, null, null, null, null, null] // Initlise an array of the team Ids as null
+
+            const teamIds = Array(teams.length).fill(null) // Initialise an array of the team Ids as null
 
             // Loop through the teams array setting the Id of any non-null values to its corresponding value in teamIds
             for (let i=0; i<teams.length; i++) {
