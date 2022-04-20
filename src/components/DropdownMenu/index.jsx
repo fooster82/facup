@@ -6,8 +6,8 @@ import axios from 'axios';
 export function DropdownMenu(props) {
 
     const round = props.round;
-    const name = props.name;
     const addTeam = props.addTeam
+    const currentTeam = props.currentTeam
 
     const [ showMenu, setShowMenu ] = useState(false);
     const [ teams, setTeams ] = useState([]);
@@ -54,8 +54,6 @@ export function DropdownMenu(props) {
     
     // Finds a team that best matches what the user has currently typed in
     function findMatch (searchWord) {
-        console.log("test")
-
         const teamButtonRefs = teamButtons.current.children; // Stores each of the team buttons in a variable
 
         Array.from(teamButtonRefs).forEach(button => button.disabled = false); // Enables all buttons
@@ -98,7 +96,7 @@ export function DropdownMenu(props) {
         <input 
             id='dropdown-form'
             ref={dropdownForm}
-            name={name}
+            value={currentTeam}            
             type="text" 
             placeholder="-------------               &#9660;" 
             onClick={openAndCloseMenu}       
