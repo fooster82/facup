@@ -14,8 +14,10 @@
 [x] Null entires don't work, should be possible for rounds that haven't been drawn yet
 [x] Add an if-loop that checks if a user already has team data 
 [x] Show a different UI depending on if a user has stats or not
-[] For the update UI, have the current teams already loaded in from the user's current stat entry
+[x] For the update UI, have the current teams already loaded in from the user's current stat entry
 [] Update teams function for if a user already has a stats entry
+    - It's sending a post request with empty team data for now and not deleting the current one
+[] The user can't change the value of the already set dropdown menus
 [] Have the UI work by season as well so that a user can have a new entry for each season
 [] Add a countdown to when the new season begins (maybe only show after the final game has been played)
 [x] Confirmation banner appears after a stat has been added
