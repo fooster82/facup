@@ -16,6 +16,7 @@ export function DropdownMenu(props) {
     const teamsMenu = useRef();
     const dropdownForm = useRef();
     const teamButtons = useMemo(() => Array(teams.length).fill(0).map(() => createRef()), []);
+    //const test = useRef();
     
     // Get all the team names from the DB
     useEffect(() => {
@@ -28,8 +29,11 @@ export function DropdownMenu(props) {
                 console.warn(err);
             }
         } 
-        fetchTeams();        
-    }, [])    
+        fetchTeams();  
+    }, [])
+
+    // Set the current team to be what is rendered into the input box
+    useEffect(() => addTeam(dropdownForm.current.placeholder), []);
 
     // Adds the event listener for the closing functionality of the drop down menu
     useEffect(() => {
@@ -42,13 +46,12 @@ export function DropdownMenu(props) {
     }, []);    
 
     // When a user clicks one of the team buttons, add that team to the matching text input field
-     function handleClick(team) {
-        let selectedTeam = team;
-        dropdownForm.current.value = selectedTeam;
+     function handleClick(selectedTeam) {
+        dropdownForm.current.value = selectedTeam; // Sets the value of the dropdown input to the selected team
 
         const matchedTeam = matchTeam(selectedTeam); // Try to match the current search term to a team in the DB  
         addTeam(matchedTeam) // Sends the team to add back to the parent component
-
+        
         setShowMenu(false); // Close the menu when a team is selected
     }
     
@@ -75,7 +78,9 @@ export function DropdownMenu(props) {
     } 
 
     // Handle the clicks to open and close the dropdown menu
-    function openAndCloseMenu() {
+    function openAndCloseMenu(e) {       
+        e.preventDefault();
+
         setShowMenu(!showMenu); // Open and close the menu
         
         // Sort the team names into alphabetical order
@@ -92,16 +97,18 @@ export function DropdownMenu(props) {
     
     return (
     <div id='dropdown-menu' ref={teamsMenu}>
-        <label><b>{round}:</b></label>
-        <input 
-            id='dropdown-form'
-            ref={dropdownForm}
-            value={currentTeam}            
-            type="text" 
-            placeholder="-------------               &#9660;" 
-            onClick={openAndCloseMenu}       
-            onChange={e => findMatch(e.target.value)}                       
-        />
+        <label id='dropdown-label'><b>{round}:</b></label>
+        <div  id='dropdown-form'>
+            <input 
+                id='dropdown-text'
+                ref={dropdownForm}
+                type="text" 
+                placeholder={currentTeam ? currentTeam : "-------------" }
+                onClick={openAndCloseMenu}       
+                onChange={e => findMatch(e.target.value)}                       
+            />
+            <button id='arrow-button' onClick={openAndCloseMenu}>▼</button>
+        
         {
             showMenu 
                 ? 
@@ -129,6 +136,7 @@ export function DropdownMenu(props) {
                     null
                 )
         } 
+        </div>
     </div>
     )
 }

@@ -153,7 +153,7 @@ export function SelectTeams() {
                     team11: teamIds[10],
                     team12: teamIds[11],
                     team13: teamIds[12],
-                    team14: teamIds[12],
+                    team14: teamIds[13],
                 })
 
                 window.alert("Your teams have been added to your profile! Go to the tracker page to check them out.")
@@ -204,7 +204,7 @@ export function SelectTeams() {
                     team11: teamIds[10],
                     team12: teamIds[11],
                     team13: teamIds[12],
-                    team14: teamIds[12],
+                    team14: teamIds[13],
                 })
 
                 window.alert("Your teams have been updated!")
@@ -240,7 +240,7 @@ export function SelectTeams() {
 
                         <form id="add-teams-form" onSubmit={e => {updateTeams(e)}} >         
 
-                            <DropdownMenu addTeam={setTeam1Callback} round={'Extra Preliminary Round'} currentTeam={currentTeams[0].toString()}/>
+                            <DropdownMenu addTeam={setTeam1Callback} round={'Extra Preliminary Round'} currentTeam={currentTeams[0]}/>
                             <DropdownMenu addTeam={setTeam2Callback} round={'Preliminary Round'} currentTeam={currentTeams[1]}/>
                             <DropdownMenu addTeam={setTeam3Callback} round={'First Round Qualifying'} currentTeam={currentTeams[2]}/>
                             <DropdownMenu addTeam={setTeam4Callback} round={'Second Round Qualifying'} currentTeam={currentTeams[3]}/>

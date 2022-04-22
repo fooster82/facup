@@ -1,14 +1,31 @@
 #dropdown-menu {
     width: 150px;
+    display: flex;
+    margin: 5px;
+}
+
+#dropdown-label {
+    min-width: 130%;
 }
 
 #dropdown-form {
-    cursor: default;
-    border-color: black;
-    width: 143px;
+    display: flex;
+    width: 164.2px;
+    position: relative;
 }
 
-#dropdown-form:focus {
+#dropdown-text {
+    cursor: default;
+    border: 1.5px solid black;
+    border-right: none;
+}
+
+#dropdown-text::placeholder {
+    color: black;
+    opacity: 1;
+}
+
+#dropdown-text:focus {
     outline: none;
     border: 2px solid black;
 }
@@ -16,14 +33,16 @@
 #dropdown-list {
     display: flex;
     flex-direction: column;
+    max-height: 30vh;
     width: inherit;
     border: 2px solid black;
     z-index: 5;
     position: absolute;
+    top: 22px;
+    overflow-y: scroll;     
 }
 
 .dropdown-item {
-    width: inherit;
     border: 0;
     background-color: black;
     color: white;
@@ -38,3 +57,10 @@
 .dropdown-item:disabled {
     display: none;
 }
+
+#arrow-button {
+    background-color: white;
+    border: 1.5px solid black;
+    border-left: none;
+}
+
