@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import './style.css';
 
-import { SelectTeams } from '../../components/SelectTeams';
+import { SelectTeams, CountdownTimer } from '../../components';
 
 export function Profile() {
     const { user: currentUser } = useSelector((state) => state.auth);
@@ -21,6 +21,8 @@ export function Profile() {
             <p>
                 <strong>Email:</strong> {currentUser.email}
             </p>
+
+            <CountdownTimer />
             
             <SelectTeams />
             

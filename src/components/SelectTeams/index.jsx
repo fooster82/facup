@@ -76,12 +76,18 @@ export function SelectTeams() {
     }, [users]) 
     
     // Check if the passer user ID matches with any entries in the stats DB and change the UI to reflect whether they do or don't
-    function matchUser(userId) {
-        // Find the matching user in the DB
-        let user = stats.find(stat => stat.username.toString() === userId.toString());
+    function matchUser(userId) {        
+        let user = stats.find(stat => stat.username.toString() === userId.toString()); // Find the matching user in the DB
 
-        // Change the state of hasTeams depending on whether there is a matching user or not
-        if (user != undefined) setHasTeams(true);
+        // Check if that stat matches the current season or not
+        let currentYear = new Date().getFullYear() // Get the current year
+        let currentMonth =  new Date().getMonth(); // Get the current month
+        let season = setSeason(currentMonth, currentYear); // Sets the current season 
+        let isCurrentSeason;
+        if (user != undefined) isCurrentSeason = user.year === season;
+
+        // Change the state of hasTeams depending on whether there is a matching user or not and if the season matches up
+        if (user != undefined && isCurrentSeason) setHasTeams(true);
         else setHasTeams(false);            
     }
 
