@@ -3,6 +3,7 @@ export { Button } from './Button';
 export { CountdownTimer } from './CountdownTimer';
 export { DropdownMenu } from './DropdownMenu';
 export { Map } from './Map';
+export { MapPin } from './MapPin';
 export { Person } from './Person';
 export { Rules } from './Rules';
 export { SelectTeams } from './SelectTeams';

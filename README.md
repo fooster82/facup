@@ -3,10 +3,10 @@
 ## To-do
 
 ### Tracker page
-[] Pin component with lat and long as props
-[] Show all of a users teams
-[] Get one pin to load in the right place
-[] Get a user's team to load in the right place
+[x] Pin component with lat and long as props
+[x] Show all of a users teams
+[x] Get one pin to load in the right place
+[] Get a user's team to load in the right place - just trying to sort the maths then this should work 
 [] Get all of a user's teams to show in the right place on the map
 [] Connect the pins up somehow
 [] Find the distance between each pin
@@ -27,6 +27,7 @@
 
 ### Small things
 - Have the timer only show for a certain period maybe with disabled forms at the same time? Probably best from after the final until the month the cup starts again
+- Combine the useEffects used for axios back into one per component
 - Need a UI to add previous season data
 - See previous seasons entries for yourself
 - Turn the confirmation banners for add teams and add stats to be a green banner not a window alert
@@ -49,7 +50,7 @@
 
 ### Profile Page
 [] Change details functionality
-[] Delete account
+[] Delete account functionality
 
 ### Small things
 - Add a dark mode
